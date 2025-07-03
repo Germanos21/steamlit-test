@@ -564,8 +564,18 @@ def show_ebay_search_form() -> None:
                             search_query = build_search_query()
                             
                             items = perform_search(search_query, filters, sort_by, items_per_page)
-                            
-                            st.session_state.search_results = items
+
+                            # Filter items by price_range (in AED)
+                            filtered_items = []
+                            for item in items:
+                                try:
+                                    item_price = float(item.get('price', 0)) * 3.65
+                                    if item_price <= price_range:
+                                        filtered_items.append(item)
+                                except Exception:
+                                    continue
+
+                            st.session_state.search_results = filtered_items
                             st.session_state.has_search = True
                         except Exception as e:
                             handle_search_error(e)

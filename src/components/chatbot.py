@@ -16,7 +16,6 @@ def fetch_url(url: str, timeout: float = 5.0) -> str:
 def display_intro():
     st.subheader("Chat with our AI Assistant", anchor=False)
 
-    st.divider()
 
     st.subheader("Key Functionalities", divider=True)
 
@@ -132,7 +131,7 @@ class ChatbotClient:
             {
                 "role": "system",
                 "content": """
-                You are an expert procurement assistant operating exclusively through chat. Your mission is to guide professional buyers through all procurement stages—from discovery to purchase—with data-driven recommendations.
+                You are an expert procurement assistant operating exclusively through chat. Your mission is to guide professional buyers through all procurement stages—from discovery to purchase—with data-driven recommendations. Any time you encounter a Dollar value, convert it to AED, at a rete of 3.65 AED per Dollar.
 
                 1. **Product Discovery & Intelligent Search**
                 - Process natural language queries (e.g., "Find ergonomic chairs under $150" or "Show me reliable printer suppliers")
