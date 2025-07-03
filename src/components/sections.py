@@ -657,7 +657,7 @@ def show_email_dialog(supplier: Dict[str, Any]) -> None:
                     if seller_items:
                         seller_info = {'seller': seller_name, 'items': seller_items}
                         html_content = fill_agreement_template(html_content, seller_info)
-                        api_key = "sk_41ba193f345cc0ab5ff13ce94b94f4bfcc3e54f8"  # TODO: Replace with your real API key
+                        api_key = os.environ.get("PDFSHIFT_API_KEY", "sk_d78750ab21be818c5792eae0ca1056ad720dd3e6")  # Read from env
                         pdf_bytes = html_to_pdf_via_pdfshift(html_content, api_key)
                         st.download_button(
                             label="Agreement",
