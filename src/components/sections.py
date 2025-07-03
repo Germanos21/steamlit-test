@@ -494,30 +494,29 @@ def show_ebay_search_form() -> None:
     """Display the eBay search form with category selection and filters."""
     try:
         initialize_session_state()
-        
+        # Move category button OUTSIDE the form
+        st.markdown("""
+            <style>
+            div[data-testid=\"stButton\"] button {
+                height: 2em;
+                width: 100%;
+                white-space: normal;
+                padding: 0.5em;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        col_button, col_input = st.columns([1, 3], gap="small")
+        with col_button:
+            st.markdown("Choose Category")
+            if st.button(get_button_text(), key="main_category_button"):
+                category_dialog()
+        with col_input:
+            st.markdown("")
+            # This input is inside the form below
         with st.form(key="ebay_search_form"):
             col1, col2 = st.columns(2, gap="large")
-            
             with col1:
-                st.markdown("""
-                    <style>
-                    div[data-testid="stButton"] button {
-                        height: 2em;
-                        width: 100%;
-                        white-space: normal;
-                        padding: 0.5em;
-                    }
-                    </style>
-                    """, unsafe_allow_html=True)
-                col_button, col_input = st.columns([1, 3], gap="small")
-                with col_button:
-                    st.markdown("Choose Category")
-                    if st.button(get_button_text(), key="main_category_button"):
-                        category_dialog()
-                with col_input:
-                    st.markdown("")
-                    st.text_input("Search within category", key="category_search", placeholder="Enter search term...")
-                
+                st.text_input("Search within category", key="category_search", placeholder="Enter search term...")
                 condition = st.selectbox(
                     "Condition",
                     options=["Any", "New", "Used", "Refurbished", "For parts or not working"],
@@ -530,7 +529,6 @@ def show_ebay_search_form() -> None:
                     index=0,
                     key="main_location_select"
                 )
-                
             with col2:
                 price_range = st.slider(
                     "Maximum Price (DHS)",
@@ -553,17 +551,13 @@ def show_ebay_search_form() -> None:
                     index=0,
                     key="main_items_per_page_select"
                 )
-                
-            submitted = st.form_submit_button("Search eBay", type="primary")
+            submitted = st.form_submit_button("Search eBay")
             if submitted:
                 try:
                     st.session_state.page = 0
-                    
                     filters = build_search_filters(condition, price_range)
                     search_query = build_search_query()
-                    
                     items = perform_search(search_query, filters, sort_by, items_per_page)
-
                     # Filter items by price_range (in AED)
                     filtered_items = []
                     for item in items:
@@ -573,7 +567,6 @@ def show_ebay_search_form() -> None:
                                 filtered_items.append(item)
                         except Exception:
                             continue
-
                     st.session_state.search_results = filtered_items
                     st.session_state.has_search = True
                 except Exception as e:
