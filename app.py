@@ -86,7 +86,7 @@ stNavbarOut = st_navbar(
     key="navBarMain",
 )
 
-st.container(height=10, border=False)
+# st.container(height=10, border=False)
 
 
 def getPage(navBarPageSelected: str):
