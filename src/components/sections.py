@@ -702,6 +702,10 @@ def show_cart() -> None:
                 border-radius: 0.5rem;
                 padding: 0.5rem;
             }
+            /* Reduce font size of metric value in cart */
+            div[data-testid="stMetricValue"] {
+                font-size: 1.3rem !important;
+            }
             div[data-testid="stMarkdown"] {
                 color: #FFF5E6;
             }
