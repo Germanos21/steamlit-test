@@ -20,7 +20,7 @@ import logging
 import webbrowser
 import os
 from pathlib import Path
-from src.components.document_viewer import open_supply_agreement, fill_agreement_template, detect_encoding, html_to_pdf_via_weasyprint
+from src.components.document_viewer import open_supply_agreement, fill_agreement_template, detect_encoding, html_to_pdf_via_pdfshift
 import io
 import base64
 
@@ -655,7 +655,8 @@ def show_email_dialog(supplier: Dict[str, Any]) -> None:
                     if seller_items:
                         seller_info = {'seller': seller_name, 'items': seller_items}
                         html_content = fill_agreement_template(html_content, seller_info)
-                        pdf_bytes = html_to_pdf_via_weasyprint(html_content)
+                        api_key = "sk_41ba193f345cc0ab5ff13ce94b94f4bfcc3e54f8"  # TODO: Replace with your real API key
+                        pdf_bytes = html_to_pdf_via_pdfshift(html_content, api_key)
                         st.download_button(
                             label="Agreement",
                             data=pdf_bytes,
