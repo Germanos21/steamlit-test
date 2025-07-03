@@ -556,15 +556,13 @@ def show_ebay_search_form() -> None:
                 
                 _, col_right = st.columns([5, 1], gap="small")
                 with col_right:
-                    if st.button("Search eBay", key="main_search_button", type="primary"):
+                    submitted = st.form_submit_button("Search eBay", type="primary")
+                    if submitted:
                         try:
                             st.session_state.page = 0
-                            
                             filters = build_search_filters(condition, price_range)
                             search_query = build_search_query()
-                            
                             items = perform_search(search_query, filters, sort_by, items_per_page)
-
                             # Filter items by price_range (in AED)
                             filtered_items = []
                             for item in items:
@@ -574,7 +572,6 @@ def show_ebay_search_form() -> None:
                                         filtered_items.append(item)
                                 except Exception:
                                     continue
-
                             st.session_state.search_results = filtered_items
                             st.session_state.has_search = True
                         except Exception as e:
