@@ -595,11 +595,8 @@ def show_search_results() -> None:
     st.session_state.search_results_string = get_data_string()
     # print(st.session_state.search_results_string)
 
-        
-    sort_by = st.selectbox("Sort by", options=list(SORT_MAP.keys()), index=0)
-    
     items = st.session_state.search_results if st.session_state.has_search and st.session_state.search_results else all_supplier
-    sorted_items = sort_items(items, sort_by)
+    sorted_items = items
     
     total_pages = math.ceil(len(sorted_items) / CARDS_PER_PAGE)
     start_idx = st.session_state.page * CARDS_PER_PAGE
