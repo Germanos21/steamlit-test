@@ -11,6 +11,7 @@ from src.components.cart import Cart
 from typing import Dict, Any
 import requests  # Add this for API calls
 import io
+import weasyprint
 
 logger = logging.getLogger(__name__)
 
@@ -344,3 +345,8 @@ def html_to_pdf_via_pdfshift(html_content: str, api_key: str) -> bytes:
         return response.content
     else:
         raise RuntimeError(f"PDFShift API error: {response.status_code} {response.text}")
+
+def html_to_pdf_via_weasyprint(html_content: str) -> bytes:
+    """Convert HTML to PDF using WeasyPrint."""
+    pdf_bytes = weasyprint.HTML(string=html_content).write_pdf()
+    return pdf_bytes
