@@ -100,7 +100,6 @@
   border-radius: 20px !important;
   color: var(--cream) !important;
   padding: 0 !important;
-
   font-weight: 400 !important;
   line-height: 40px !important;
   text-align: center !important;
@@ -313,4 +312,31 @@ footer {
   border-color: var(--accent-gold);
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.stFormSubmitButton > button {
+  width: 180px !important;
+  height: 40px !important;
+  min-width: 180px !important;
+  min-height: 40px !important;
+  max-width: 180px !important;
+  max-height: 40px !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(45deg, var(--primary-red), var(--secondary-red)) !important;
+  border: 1px solid var(--accent-gold) !important;
+  border-radius: 20px !important;
+  color: var(--cream) !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  line-height: 40px !important;
+  text-align: center !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3) !important;
+  margin: 0 !important;
+}
+.stFormSubmitButton > button:hover {
+  background: linear-gradient(45deg, var(--secondary-red), var(--primary-red)) !important;
+  border-color: var(--accent-gold) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4) !important;
 }
