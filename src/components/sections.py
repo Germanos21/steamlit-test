@@ -457,7 +457,7 @@ def category_dialog() -> None:
         # Dialog buttons
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("Apply", key="dialog_apply_category"):
+            if st.form_submit_button("Apply", key="dialog_apply_category"):
                 if validate_category(main_category, subcategory):
                     st.session_state.selected_category = main_category
                     st.session_state.selected_subcategory = subcategory
