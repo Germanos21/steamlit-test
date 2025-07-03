@@ -133,9 +133,9 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
         with col1:
             try:
                 price = float(item['price']) * 3.65
-                st.markdown(f"<div class='price-metric'>💰 Price: AED {price:.2f}</div>", unsafe_allow_html=True)
+                st.metric("💰 Price", f"AED {price:.2f}")
             except (ValueError, TypeError):
-                st.markdown("<div class='price-metric'>💰 Price: N/A</div>", unsafe_allow_html=True)
+                st.metric("💰 Price", "N/A")
         with col2:
             st.markdown(f"**{item['condition']}**")
             unique_key = f"add_to_cart_{item.get('id', hash(item['title']))}"
