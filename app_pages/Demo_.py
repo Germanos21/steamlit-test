@@ -20,16 +20,4 @@ with st.expander("View and manage items in your shopping cart"):
     with col_chat:
         show_chatbot()
 
-st.header("Ask your AI to Find the Best Supplier")
-
-show_header(
-    "Automate Communications",
-    "Select suppliers and let AMPA handle outreach and follow-ups via automated emails."
-)
-
-show_header(
-    "Monitor and Finalize",
-    "Track communications and negotiation progress in the real-time dashboard, then finalize deals with ease."
-)
-
 streamlit_footer()
