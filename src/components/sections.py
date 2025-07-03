@@ -496,27 +496,14 @@ def show_ebay_search_form() -> None:
         initialize_session_state()
         
         with st.container():
+            st.markdown("Choose Category")
+            if st.button(get_button_text(), key="main_category_button"):
+                category_dialog()
             with st.form("ebay_search_form"):
                 col1, col2 = st.columns(2, gap="large")
                 with col1:
-                    st.markdown("""
-                        <style>
-                        div[data-testid=\"stButton\"] button {
-                            height: 2em;
-                            width: 100%;
-                            white-space: normal;
-                            padding: 0.5em;
-                        }
-                        </style>
-                        """, unsafe_allow_html=True)
-                    col_button, col_input = st.columns([1, 3], gap="small")
-                    with col_button:
-                        st.markdown("Choose Category")
-                        if st.button(get_button_text(), key="main_category_button"):
-                            category_dialog()
-                    with col_input:
-                        st.markdown("")
-                        st.text_input("Search within category", key="category_search", placeholder="Enter search term...")
+                    st.markdown("")
+                    st.text_input("Search within category", key="category_search", placeholder="Enter search term...")
                     condition = st.selectbox(
                         "Condition",
                         options=["Any", "New", "Used", "Refurbished", "For parts or not working"],
