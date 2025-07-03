@@ -495,7 +495,7 @@ def show_ebay_search_form() -> None:
     try:
         initialize_session_state()
         
-        with st.form("ebay_search_form"):
+        with st.form(key="ebay_search_form"):
             col1, col2 = st.columns(2, gap="large")
             
             with col1:
