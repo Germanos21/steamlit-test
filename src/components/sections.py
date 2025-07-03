@@ -719,7 +719,7 @@ def show_cart() -> None:
             col1, col2 = st.columns([3, 2])
             
             with col1:
-                st.markdown(f"<h4 style='color: #FFF5E6;'>{item['title']}</h4>", unsafe_allow_html=True)
+                st.markdown(f"<span style='color: #FFF5E6; font-size: 1.05rem; font-weight: 500;'>{item['title']}</span>", unsafe_allow_html=True)
                 st.markdown(f"👤 **Seller:** {item['seller']}")
                 st.markdown(f"**Condition:** {item['condition']}")
                 st.markdown(f"⭐ **Rating:** {item.get('rating', 'Unknown')}")
@@ -728,9 +728,9 @@ def show_cart() -> None:
                 try:
                     price = float(item['price']) * 3.65
                     total_price += price
-                    st.metric("💰 **Price**", f"AED {price:.2f}")
+                    st.metric("💰 **Price**", f"<span style='font-size:1.1rem;'>AED {price:.2f}</span>", help=None, delta=None, delta_color="normal", label_visibility="visible", value_visibility="visible")
                 except (ValueError, TypeError):
-                    st.metric("💰 **Price**", "N/A")
+                    st.metric("💰 **Price**", "<span style='font-size:1.1rem;'>N/A</span>", help=None, delta=None, delta_color="normal", label_visibility="visible", value_visibility="visible")
 
                 # Replace rating with Contact button
                 if st.button("Contact", key=f"contact_supplier_{i}"):
