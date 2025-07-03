@@ -215,10 +215,6 @@ h1::after {
 [data-testid="stNavigation"] {
   background: rgba(26, 26, 26, 0.9);
   border-bottom: 1px solid var(--accent-gold);
-  height: 64px !important;
-  min-height: 64px !important;
-  max-height: 64px !important;
-  font-size: 1.1rem !important;
 }
 
 /* Footer styling */
