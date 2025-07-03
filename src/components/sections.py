@@ -728,9 +728,9 @@ def show_cart() -> None:
                 try:
                     price = float(item['price']) * 3.65
                     total_price += price
-                    st.metric("💰 **Price**", f"<span style='font-size:1.1rem;'>AED {price:.2f}</span>", help=None, delta=None, delta_color="normal", label_visibility="visible", value_visibility="visible")
+                    st.metric("💰 **Price**", f"AED {price:.2f}")
                 except (ValueError, TypeError):
-                    st.metric("💰 **Price**", "<span style='font-size:1.1rem;'>N/A</span>", help=None, delta=None, delta_color="normal", label_visibility="visible", value_visibility="visible")
+                    st.metric("💰 **Price**", "N/A")
 
                 # Replace rating with Contact button
                 if st.button("Contact", key=f"contact_supplier_{i}"):
