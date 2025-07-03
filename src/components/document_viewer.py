@@ -339,11 +339,12 @@ def open_supply_agreement(seller_info: dict = None):
         return False
 
 def html_to_pdf_via_pdfshift(html_content: str, api_key: str) -> bytes:
-    """Convert HTML to PDF using the PDFShift API."""
+    """Convert HTML to PDF using the PDFShift API (using X-API-Key header)."""
     url = "https://api.pdfshift.io/v3/convert/pdf"
+    headers = {"X-API-Key": api_key}
     response = requests.post(
         url,
-        auth=(api_key, ""),
+        headers=headers,
         json={"source": html_content}
     )
     if response.status_code == 200:
