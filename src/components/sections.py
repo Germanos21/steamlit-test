@@ -103,10 +103,19 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
                     color: #FFF5E6;
                     margin: 0.5rem 0 0.5rem 0;
                 }
+                .seller-name {
+                    font-size: 1.4rem !important;
+                    font-weight: 500;
+                    color: #FFF5E6;
+                    margin-bottom: 0.5rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
             </style>
         """, unsafe_allow_html=True)
         
-        st.header(f"\U0001F464 {item['seller']}")
+        st.markdown(f"<div class='seller-name'>\U0001F464 {item['seller']}</div>", unsafe_allow_html=True)
             
         with st.container():
             col1, col2, col3 = st.columns([1, 8, 1], gap='small')
@@ -716,7 +725,7 @@ def show_cart() -> None:
                     total_price += price
                     st.metric("💰 **Price**", f"AED {price:.2f}")
                 except (ValueError, TypeError):
-                    st.metric("💰 **Price**", "N/A")
+                    st.metric("�� **Price**", "N/A")
 
                 # Replace rating with Contact button
                 if st.button("Contact", key=f"contact_supplier_{i}"):
