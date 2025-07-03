@@ -133,7 +133,7 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
         with col1:
             try:
                 price = float(item['price']) * 3.65
-                st.metric("💰 Price", f"AED {price:.2f}")
+                st.metric("💰 Price", f"AED {price:,.2f}")
             except (ValueError, TypeError):
                 st.metric("💰 Price", "N/A")
         with col2:
@@ -220,7 +220,7 @@ def show_supplier_card(supplier: Dict[str, Any]) -> None:
             with col2:
                 status = "✅ Verified" if supplier["verified"] else "❌ Not Verified"
                 st.markdown(f"**{status}**")
-                st.metric("💰 Price", f"${supplier['price']:.2f}")
+                st.metric("💰 Price", f"${supplier['price']:,.2f}")
                 
             st.markdown(f"⭐ **Rating:** {supplier['rating']}/5.0")
 
@@ -729,7 +729,7 @@ def show_cart() -> None:
                 try:
                     price = float(item['price']) * 3.65
                     total_price += price
-                    st.metric("💰 **Price**", f"AED {price:.2f}")
+                    st.metric("💰 **Price**", f"AED {price:,.2f}")
                 except (ValueError, TypeError):
                     st.metric("💰 **Price**", "N/A")
 
@@ -742,4 +742,4 @@ def show_cart() -> None:
                     st.rerun()
     
     st.divider()
-    st.metric("Total", f"AED {total_price:.2f}")
+    st.metric("Total", f"AED {total_price:,.2f}")

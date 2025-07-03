@@ -66,7 +66,7 @@ def fill_agreement_template(html_content: str, seller_info: dict) -> str:
             
         # Calculate total price for all items
         total_price = sum(float(item.get('price', 0)) * 3.65 for item in seller_items)
-        logger.info(f"Total price calculated: AED {total_price:.2f}")
+        logger.info(f"Total price calculated: AED {total_price:,.2f}")
 
         # Find the ordered list that contains the items
         ordered_list = soup.find('ol')
@@ -82,7 +82,7 @@ def fill_agreement_template(html_content: str, seller_info: dict) -> str:
                 product_condition = item.get('condition', 'Not specified')
                 
                 # Create product description
-                product_description = f"{product_title} - {product_condition} - AED {product_price:.2f}"
+                product_description = f"{product_title} - {product_condition} - AED {product_price:,.2f}"
                 logger.info(f"Adding product to agreement: {product_description}")
                 
                 # Create new list item
@@ -115,8 +115,8 @@ def fill_agreement_template(html_content: str, seller_info: dict) -> str:
                     
                     # If multiple items, show "Total Agreed Price", otherwise just "Agreed Price"
                     price_label = "Total Agreed Price" if len(seller_items) > 1 else "Agreed Price"
-                    price_display.string = f"{price_label}: AED {total_price:.2f}"
-                    logger.info(f"Added price display: {price_label}: AED {total_price:.2f}")
+                    price_display.string = f"{price_label}: AED {total_price:,.2f}"
+                    logger.info(f"Added price display: {price_label}: AED {total_price:,.2f}")
                     
                     # Insert the price display after the price description paragraph
                     price_desc_para.insert_after(price_display)
@@ -185,10 +185,10 @@ def show_email_dialog(supplier: Dict[str, Any]) -> None:
         # Email body template
         default_body = f"""Dear {supplier.get('seller', 'Supplier')},
 
-I am interested in your product "{supplier.get('title', 'product')}" and would like to discuss potential business opportunities. I found your listing through the AMPA Procurement Platform.
+I am interested in your product "{supplier.get('title', 'product')} (Price: AED {float(supplier.get('price', 0)) * 3.65:,.2f})" and would like to discuss potential business opportunities. I found your listing through the AMPA Procurement Platform.
 
 Product Details:
-- {supplier.get('title', 'product')} (Price: AED {float(supplier.get('price', 0)) * 3.65:.2f})
+- {supplier.get('title', 'product')} (Price: AED {float(supplier.get('price', 0)) * 3.65:,.2f})
 
 Please provide the following information:
 1. Minimum Order Quantity (MOQ)

@@ -114,7 +114,7 @@ class Cart:
                     try:
                         price = float(item['price']) * 3.65
                         total_price += price
-                        st.metric("💰 **Price**", f"AED {price:.2f}")
+                        st.metric("💰 **Price**", f"AED {price:,.2f}")
                         
                     except (ValueError, TypeError):
                         st.metric("💰 **Price**", "N/A")
@@ -125,7 +125,7 @@ class Cart:
                         self.remove_item(item.get('id', hash(item['title'])))
                         st.rerun()
         st.divider()
-        st.metric("Total", f"AED {total_price:.2f}")
+        st.metric("Total", f"AED {total_price:,.2f}")
 
         # if st.button("Export to chat"):
         #     try:
