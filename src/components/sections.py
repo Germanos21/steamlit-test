@@ -495,7 +495,7 @@ def show_ebay_search_form() -> None:
     try:
         initialize_session_state()
         
-        with st.form(key="ebay_search_form"):
+        with st.container():
             col1, col2 = st.columns(2, gap="large")
             
             with col1:
@@ -532,14 +532,16 @@ def show_ebay_search_form() -> None:
                 )
                 
             with col2:
+                st.markdown("Maximum Price (DHS)")
                 price_range = st.slider(
-                    "Maximum Price (DHS)",
+                    label="Maximum Price (DHS)",
                     min_value=DEFAULT_PRICE_RANGE[0],
                     max_value=DEFAULT_PRICE_RANGE[1],
                     value=DEFAULT_PRICE_RANGE[1],
                     step=PRICE_STEP,
                     format="%d",
-                    key="main_price_slider"
+                    key="main_price_slider",
+                    label_visibility="collapsed"
                 )
                 sort_by = st.selectbox(
                     "Sort by",
@@ -556,31 +558,29 @@ def show_ebay_search_form() -> None:
                 
                 _, col_right = st.columns([5, 1], gap="small")
                 with col_right:
-                    search_clicked = st.form_submit_button("Search eBay")
-            
-            if search_clicked:
-                try:
-                    st.session_state.page = 0
-                    
-                    filters = build_search_filters(condition, price_range)
-                    search_query = build_search_query()
-                    
-                    items = perform_search(search_query, filters, sort_by, items_per_page)
-
-                    # Filter items by price_range (in AED)
-                    filtered_items = []
-                    for item in items:
+                    if st.button("Search eBay", key="main_search_button", type="primary"):
                         try:
-                            item_price = float(item.get('price', 0)) * 3.65
-                            if item_price <= price_range:
-                                filtered_items.append(item)
-                        except Exception:
-                            continue
+                            st.session_state.page = 0
+                            
+                            filters = build_search_filters(condition, price_range)
+                            search_query = build_search_query()
+                            
+                            items = perform_search(search_query, filters, sort_by, items_per_page)
 
-                    st.session_state.search_results = filtered_items
-                    st.session_state.has_search = True
-                except Exception as e:
-                    handle_search_error(e)
+                            # Filter items by price_range (in AED)
+                            filtered_items = []
+                            for item in items:
+                                try:
+                                    item_price = float(item.get('price', 0)) * 3.65
+                                    if item_price <= price_range:
+                                        filtered_items.append(item)
+                                except Exception:
+                                    continue
+
+                            st.session_state.search_results = filtered_items
+                            st.session_state.has_search = True
+                        except Exception as e:
+                            handle_search_error(e)
     except Exception as e:
         logger.error(f"Error in search form: {str(e)}")
         st.error("An unexpected error occurred. Please try again later.")
