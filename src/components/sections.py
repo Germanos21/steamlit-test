@@ -457,7 +457,7 @@ def category_dialog() -> None:
         # Dialog buttons
         col1, col2 = st.columns(2)
         with col1:
-            if st.form_submit_button("Apply", key="dialog_apply_category"):
+            if st.button("Apply", key="dialog_apply_category"):
                 if validate_category(main_category, subcategory):
                     st.session_state.selected_category = main_category
                     st.session_state.selected_subcategory = subcategory
@@ -495,86 +495,89 @@ def show_ebay_search_form() -> None:
     try:
         initialize_session_state()
         
-        with st.container():
-            st.markdown("""
-                <style>
-                div[data-testid=\"stButton\"] button {
-                    height: 2em;
-                    width: 100%;
-                    white-space: normal;
-                    padding: 0.5em;
-                }
-                </style>
-            """, unsafe_allow_html=True)
-            col_button, col_input = st.columns([1, 3], gap="small")
-            with col_button:
-                st.markdown("Choose Category")
-                if st.button(get_button_text(), key="main_category_button"):
-                    category_dialog()
-            with st.form("ebay_search_form"):
-                col1, col2 = st.columns(2, gap="large")
-                
-                with col1:
+        with st.form("ebay_search_form"):
+            col1, col2 = st.columns(2, gap="large")
+            
+            with col1:
+                st.markdown("""
+                    <style>
+                    div[data-testid="stButton"] button {
+                        height: 2em;
+                        width: 100%;
+                        white-space: normal;
+                        padding: 0.5em;
+                    }
+                    </style>
+                    """, unsafe_allow_html=True)
+                col_button, col_input = st.columns([1, 3], gap="small")
+                with col_button:
+                    st.markdown("Choose Category")
+                    if st.button(get_button_text(), key="main_category_button"):
+                        category_dialog()
+                with col_input:
                     st.markdown("")
                     st.text_input("Search within category", key="category_search", placeholder="Enter search term...")
-                    condition = st.selectbox(
-                        "Condition",
-                        options=["Any", "New", "Used", "Refurbished", "For parts or not working"],
-                        index=0,
-                        key="main_condition_select"
-                    )
-                    location = st.selectbox(
-                        "Location",
-                        options=["Worldwide", "United States", "Europe", "Asia", "Australia"],
-                        index=0,
-                        key="main_location_select"
-                    )
-                with col2:
-                    st.markdown("Maximum Price (DHS)")
-                    price_range = st.slider(
-                        label="Maximum Price (DHS)",
-                        min_value=DEFAULT_PRICE_RANGE[0],
-                        max_value=DEFAULT_PRICE_RANGE[1],
-                        value=DEFAULT_PRICE_RANGE[1],
-                        step=PRICE_STEP,
-                        format="%d",
-                        key="main_price_slider",
-                        label_visibility="collapsed"
-                    )
-                    sort_by = st.selectbox(
-                        "Sort by",
-                        options=list(SORT_MAP.keys()),
-                        index=0,
-                        key="main_sort_select"
-                    )
-                    items_per_page = st.selectbox(
-                        "Items per page",
-                        options=ITEMS_PER_PAGE_OPTIONS,
-                        index=0,
-                        key="main_items_per_page_select"
-                    )
-                    _, col_right = st.columns([5, 1], gap="small")
-                    with col_right:
-                        submitted = st.form_submit_button("Search eBay", type="primary", key="main_search_button")
-                        if submitted:
-                            try:
-                                st.session_state.page = 0
-                                filters = build_search_filters(condition, price_range)
-                                search_query = build_search_query()
-                                items = perform_search(search_query, filters, sort_by, items_per_page)
-                                # Filter items by price_range (in AED)
-                                filtered_items = []
-                                for item in items:
-                                    try:
-                                        item_price = float(item.get('price', 0)) * 3.65
-                                        if item_price <= price_range:
-                                            filtered_items.append(item)
-                                    except Exception:
-                                        continue
-                                st.session_state.search_results = filtered_items
-                                st.session_state.has_search = True
-                            except Exception as e:
-                                handle_search_error(e)
+                
+                condition = st.selectbox(
+                    "Condition",
+                    options=["Any", "New", "Used", "Refurbished", "For parts or not working"],
+                    index=0,
+                    key="main_condition_select"
+                )
+                location = st.selectbox(
+                    "Location",
+                    options=["Worldwide", "United States", "Europe", "Asia", "Australia"],
+                    index=0,
+                    key="main_location_select"
+                )
+                
+            with col2:
+                price_range = st.slider(
+                    "Maximum Price (DHS)",
+                    min_value=DEFAULT_PRICE_RANGE[0],
+                    max_value=DEFAULT_PRICE_RANGE[1],
+                    value=DEFAULT_PRICE_RANGE[1],
+                    step=PRICE_STEP,
+                    format="%d",
+                    key="main_price_slider"
+                )
+                sort_by = st.selectbox(
+                    "Sort by",
+                    options=list(SORT_MAP.keys()),
+                    index=0,
+                    key="main_sort_select"
+                )
+                items_per_page = st.selectbox(
+                    "Items per page",
+                    options=ITEMS_PER_PAGE_OPTIONS,
+                    index=0,
+                    key="main_items_per_page_select"
+                )
+                
+            submitted = st.form_submit_button("Search eBay", type="primary")
+            if submitted:
+                try:
+                    st.session_state.page = 0
+                    
+                    filters = build_search_filters(condition, price_range)
+                    search_query = build_search_query()
+                    
+                    items = perform_search(search_query, filters, sort_by, items_per_page)
+
+                    # Filter items by price_range (in AED)
+                    filtered_items = []
+                    for item in items:
+                        try:
+                            item_price = float(item.get('price', 0)) * 3.65
+                            if item_price <= price_range:
+                                filtered_items.append(item)
+                        except Exception:
+                            continue
+
+                    st.session_state.search_results = filtered_items
+                    st.session_state.has_search = True
+                except Exception as e:
+                    handle_search_error(e)
     except Exception as e:
         logger.error(f"Error in search form: {str(e)}")
         st.error("An unexpected error occurred. Please try again later.")
