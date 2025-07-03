@@ -14,7 +14,7 @@ def fetch_url(url: str, timeout: float = 5.0) -> str:
     return resp.text
 
 def display_intro():
-    st.header("✨ Chat with an assistant and effortlessly re-rank the most relevant suppliers.", anchor=False)
+    st.subheader("Chat with our AI Assistant", anchor=False)
 
     st.divider()
 
