@@ -112,6 +112,11 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
                     align-items: center;
                     gap: 0.5rem;
                 }
+                .price-metric {
+                    font-size: 1.1rem !important;
+                    font-weight: 500;
+                    color: #FFD700;
+                }
             </style>
         """, unsafe_allow_html=True)
         
@@ -128,9 +133,9 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
         with col1:
             try:
                 price = float(item['price']) * 3.65
-                st.metric("💰 Price", f"AED {price:.2f}")
+                st.markdown(f"<div class='price-metric'>\ud83d\udcb0 Price: AED {price:.2f}</div>", unsafe_allow_html=True)
             except (ValueError, TypeError):
-                st.metric("💰 Price", "N/A")
+                st.markdown("<div class='price-metric'>\ud83d\udcb0 Price: N/A</div>", unsafe_allow_html=True)
         with col2:
             st.markdown(f"**{item['condition']}**")
             unique_key = f"add_to_cart_{item.get('id', hash(item['title']))}"
@@ -725,7 +730,7 @@ def show_cart() -> None:
                     total_price += price
                     st.metric("💰 **Price**", f"AED {price:.2f}")
                 except (ValueError, TypeError):
-                    st.metric("�� **Price**", "N/A")
+                    st.metric("💰 **Price**", "N/A")
 
                 # Replace rating with Contact button
                 if st.button("Contact", key=f"contact_supplier_{i}"):
