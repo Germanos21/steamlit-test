@@ -1,0 +1,11 @@
+[theme]
+primaryColor="#fff"          # Deep red as primary
+backgroundColor="#1A1A1A"       # Dark charcoal background
+secondaryBackgroundColor="#4B0F1E"  # Dark burgundy
+# textColor="#4b0f1e"
+textColor="#FFF5E6"            # Cream text for better readability
+font="sans serif"
+
+[client]
+toolbarMode = "viewer"
+showSidebarNavigation = false

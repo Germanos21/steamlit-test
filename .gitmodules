@@ -1,0 +1,6 @@
+[submodule "project-genai-cold-email-generator"]
+	path = project-genai-cold-email-generator
+	url = https://github.com/codebasics/project-genai-cold-email-generator.git
+[submodule "streamlit-plugins"]
+	path = streamlit-plugins
+	url = https://github.com/quiradev/streamlit-plugins.git

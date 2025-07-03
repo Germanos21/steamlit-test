@@ -1,0 +1,4 @@
+import streamlit_antd_components as sac
+
+sac.pagination(align='center', jump=True, show_total=True)
+

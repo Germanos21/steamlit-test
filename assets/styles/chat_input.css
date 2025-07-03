@@ -1,0 +1,30 @@
+/* 
+.stChatInput {
+    color: white;
+} */
+
+/* .st-emotion-cache-gsyaok {
+    background-color: #FFFFFF;
+} */
+
+/* .st-bb {
+    background-color: #FFFFFF;
+    color: #4B0F1E;
+} */
+
+/* div[data-testid="stChatInput"] {
+    background-color: #FFFFFF;
+} */
+  
+div[data-testid="stChatInput"] textarea {
+    background-color: #FFFFFF !important;
+    color: #4B0F1E !important;
+}
+
+div[data-testid="stChatInput"] .st-emotion-cache-gsyaok {
+    background-color: #FFFFFF !important;
+}
+
+div[data-testid="stChatInput"] button {
+    color: #4B0F1E !important;
+}

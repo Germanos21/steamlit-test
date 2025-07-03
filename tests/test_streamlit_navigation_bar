@@ -1,0 +1,34 @@
+import streamlit as st
+
+from streamlit_plugins.components.navbar import st_navbar
+
+# make it look nice from the start
+st.set_page_config(layout='wide', initial_sidebar_state='collapsed')
+
+# specify the primary menu definition
+menu_data = [
+    {'label': "Left End"},
+    {'id': 'Copy',  'label': "Copy"},
+    {'label': "Dropdown1",
+     'submenu': [{'id': ' subid11', 'label': "Sub-item 1"},
+                 {'id': 'subid12',  'label': "Sub-item 2"},
+                 {'id': 'subid13', 'label': "Sub-item 3"}]},
+    {'label': "Chart"},  # no tooltip message
+    {'id': ' Crazy return value B',  'label': "Calendar"},
+    {'label': "Dashboard", 'ttip': "I'm the Dashboard tooltip!"},
+    # can add a tooltip message
+    {'label': "Right End"},
+    {'label': "Dropdown2",
+     'submenu': [{'label': "Sub-item 1"},  {'label': "Sub-item 2"},
+                 { 'label': "Sub-item 3", }]},
+]
+
+
+menu_id = st_navbar(
+    menu_definition=menu_data,
+    sticky_nav=True,
+    position_mode='top',
+)
+
+
+st.text("Hello world" * 1000)
