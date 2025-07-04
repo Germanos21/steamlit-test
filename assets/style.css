@@ -214,7 +214,7 @@ h1::after {
 /* Navigation enhancements */
 [data-testid="stNavigation"] {
   background: rgba(26, 26, 26, 0.9);
-  border-bottom: 1px solid var(--accent-gold);
+  /* border-bottom: 1px solid var(--accent-gold); */
 }
 
 /* Footer styling */
