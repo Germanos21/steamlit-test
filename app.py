@@ -70,7 +70,7 @@ stNavbarOut = st_navbar(
     styles={
         "nav": {
             "justify-content": "left",
-            "margin-bottom": "40 rem",
+            "margin-bottom": "0",
         },
         "span": {
             "border-radius": "0.5rem",
