@@ -59,8 +59,6 @@ ALL_PAGES_TITLE_KEY = [
 if "current_page" not in st.session_state:
     st.session_state.current_page = "Home"
 
-# Wrap the navbar in a div for custom width and border
-st.markdown('<div class="navbar-inner">', unsafe_allow_html=True)
 stNavbarOut = st_navbar(
     ALL_PAGES_TITLE_KEY,
     logo_path=str(BASE_DIR / "assets" / "eand-logo" / "small" / "White" / "e&-lockup_Enterprise_engl_vert_White_rgb-cropped.svg"),
@@ -72,7 +70,7 @@ stNavbarOut = st_navbar(
     styles={
         "nav": {
             "justify-content": "left",
-            "margin-bottom": "0",
+            "margin-bottom": "40 rem",
         },
         "span": {
             "border-radius": "0.5rem",
@@ -87,7 +85,6 @@ stNavbarOut = st_navbar(
     },
     key="navBarMain",
 )
-st.markdown('</div>', unsafe_allow_html=True)
 
 st.container(height=10, border=False)
 
