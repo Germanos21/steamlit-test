@@ -219,6 +219,8 @@ h1::after {
   box-shadow: none !important;
   background-image: none !important;
   background-color: inherit !important;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Footer styling */
