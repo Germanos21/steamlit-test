@@ -89,6 +89,10 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
                     border-radius: 0.5rem;
                     padding: 0.5rem;
                 }
+                /* Reduce font size of metric value in cards */
+                div[data-testid="stMetricValue"] {
+                    font-size: 1.3rem !important;
+                }
                 div[data-testid="stMarkdown"] {
                     color: #FFF5E6;
                 }
@@ -190,6 +194,10 @@ def show_supplier_card(supplier: Dict[str, Any]) -> None:
                     border: 1px solid #D4AF37;
                     border-radius: 0.5rem;
                     padding: 0.5rem;
+                }
+                /* Reduce font size of metric value in cards */
+                div[data-testid="stMetricValue"] {
+                    font-size: 1.3rem !important;
                 }
                 div[data-testid="stMarkdown"] {
                     color: #FFF5E6;
