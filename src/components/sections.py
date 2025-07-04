@@ -45,10 +45,7 @@ if "cart_items" not in st.session_state:
     st.session_state.cart_items = []
 
 
-def show_header(title: str, subtitle: str) -> None:
-    with st.container():
-        st.header(title, divider=True)
-        st.caption(subtitle)
+
 
 
 def show_image(image_path: str) -> None:
@@ -58,7 +55,7 @@ def show_image(image_path: str) -> None:
         st.image("assets/images/placeholder.png")
 
 
-def show_ebay_card(item: Dict[str, Any]) -> None:
+def show_ebay_card(item: Dict[str, Any], idx: int) -> None:
     with st.container(border=True):
         st.markdown("""
             <style>
@@ -142,7 +139,7 @@ def show_ebay_card(item: Dict[str, Any]) -> None:
                 st.metric("💰 Price", "N/A")
         with col2:
             st.markdown(f"**{item['condition']}**")
-            unique_key = f"add_to_cart_{item.get('id', hash(item['title']))}"
+            unique_key = f"add_to_cart_{idx}"
             
             # Check if item is already in cart
             item_id = item.get('id', hash(item['title']))
@@ -251,13 +248,18 @@ def show_items_grid(items: List[Dict[str, Any]]) -> None:
             </style>
         """, unsafe_allow_html=True)
         
+        idx = 0
         for i in range(0, len(items), 3):
             cols = st.columns(3)
             row_items = items[i:i + 3]
             
             for col, item in zip(cols, row_items):
                 with col:
-                    show_ebay_card(item) if "title" in item else show_supplier_card(item)
+                    if "title" in item:
+                        show_ebay_card(item, idx)
+                    else:
+                        show_supplier_card(item)
+                    idx += 1
 
 
 def show_pagination(current_page: int, total_pages: int) -> None:
