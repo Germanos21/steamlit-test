@@ -1,5 +1,5 @@
 import streamlit as st
-from src.components.sections import show_search_results, show_ebay_search_form, show_cart
+from src.components.sections import show_header, show_search_results, show_ebay_search_form, show_cart
 from src.components.chatbot import show_chatbot
 from src.components.footer import streamlit_footer
 

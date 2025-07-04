@@ -57,7 +57,7 @@ ALL_PAGES_TITLE_KEY = [
 
 # Initialize session state for navigation if it doesn't exist
 if "current_page" not in st.session_state:
-    st.session_state.current_page = "Home"
+    st.session_state.current_page = "Home_"
 
 stNavbarOut = st_navbar(
     ALL_PAGES_TITLE_KEY,
