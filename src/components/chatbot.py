@@ -304,6 +304,7 @@ def show_chatbot():
                 min-height: 450px;
                 overflow: scroll;
                 color: #FFF5E6;
+                font-size: 0.95rem;
             }
             """,)
         with textArea:
@@ -325,7 +326,7 @@ def show_chatbot():
                     if message["role"] == "assistant" or message["role"] == "user":
                         avatar = "assets/eand-logo/small/Red/e&-lockup_Enterprise_engl_vert_red_rgb-cropped.svg" if message["role"] == "assistant" else ":material/person:"
                         with st.chat_message(message["role"], avatar=avatar):
-                            st.markdown(message["content"])
+                            st.markdown(f"<span style='font-size:0.95rem'>{message['content']}</span>", unsafe_allow_html=True)
 
             # Add custom styling for chat input
             st.markdown("""

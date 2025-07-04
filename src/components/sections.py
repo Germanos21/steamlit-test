@@ -673,7 +673,7 @@ def show_email_dialog(supplier: Dict[str, Any]) -> None:
                             st.stop()
                         pdf_bytes = html_to_pdf_via_pdfshift(html_content, api_key)
                         st.download_button(
-                            label="Agreement",
+                            label="Contract",
                             data=pdf_bytes,
                             file_name=f"Supply_Agreement_{seller_name}.pdf",
                             mime="application/pdf",
