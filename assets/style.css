@@ -212,15 +212,15 @@ h1::after {
 }
 
 /* Navigation enhancements */
-[data-testid="stNavigation"] {
-  background: rgba(26, 26, 26, 0.9);
-  /* border-bottom: 1px solid var(--accent-gold); */
-  border-bottom: none !important;
-  box-shadow: none !important;
-  background-image: none !important;
-  background-color: inherit !important;
+.navbar-inner {
   max-width: 1200px;
   margin: 0 auto;
+  border-bottom: 1px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+}
+[data-testid="stNavigation"] {
+  background: rgba(26, 26, 26, 0.9);
+  border-bottom: none !important;
 }
 
 /* Footer styling */
