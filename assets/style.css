@@ -215,6 +215,10 @@ h1::after {
 [data-testid="stNavigation"] {
   background: rgba(26, 26, 26, 0.9);
   /* border-bottom: 1px solid var(--accent-gold); */
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  background-color: inherit !important;
 }
 
 /* Footer styling */
