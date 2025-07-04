@@ -196,6 +196,19 @@ def group_items_by_seller(cart_items):
             sellers[seller_name]['items'].append(item)
     return sellers
 
+def replace_local_images_with_github_raw(html_content):
+    """
+    Replace all <img src="Supply_Agreement_Arial_files/..."> with the corresponding GitHub raw URL.
+    """
+    GITHUB_RAW_BASE = "https://raw.githubusercontent.com/Germanos21/steamlit-test/main/assets/document_to_edit/"
+    def repl(match):
+        src = match.group(1)
+        if src.startswith('Supply_Agreement_Arial_files/'):
+            raw_url = GITHUB_RAW_BASE + src
+            return match.group(0).replace(src, raw_url)
+        return match.group(0)
+    return re.sub(r'<img[^>]+src=["\"](.*?)["\"]', repl, html_content)
+
 @st.dialog("Email Template")
 def show_email_dialog(supplier: Dict[str, Any]) -> None:
     """Display the email template dialog for a specific supplier."""
@@ -265,9 +278,8 @@ AMPA Procurement Platform User
                 if seller_items:
                     seller_info = {'seller': seller_name, 'items': seller_items}
                     html_content = fill_agreement_template(html_content, seller_info)
-                    # Embed images as base64 before PDF conversion
-                    base_dir = os.path.join(root_dir, 'assets', 'document_to_edit')
-                    html_content = embed_local_images_as_base64(html_content, base_dir)
+                    # Replace local image src with GitHub raw URLs before PDF conversion
+                    html_content = replace_local_images_with_github_raw(html_content)
                     download_ready = True
                     download_data = html_content
                     download_filename = f"Supply_Agreement_{seller_name}.html"
@@ -345,9 +357,8 @@ def open_supply_agreement(seller_info: dict = None):
                 
                 # Fill the template with seller information
                 html_content = fill_agreement_template(html_content, seller_info)
-                # Embed images as base64 before PDF conversion
-                base_dir = os.path.join(root_dir, 'assets', 'document_to_edit')
-                html_content = embed_local_images_as_base64(html_content, base_dir)
+                # Replace local image src with GitHub raw URLs before PDF conversion
+                html_content = replace_local_images_with_github_raw(html_content)
                 # PDF download button only
                 try:
                     api_key = os.environ.get("PDFSHIFT_API_KEY")
