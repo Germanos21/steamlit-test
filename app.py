@@ -17,22 +17,22 @@ with open(BASE_DIR / "assets" / "style.css") as f:
 st.markdown("""
 <style>
 html, body, [data-testid="stAppViewContainer"] {
-  font-size: clamp(14px, 1.2vw, 18px);
+  font-size: 16px;
 }
 h1, .stMarkdown h1 {
-  font-size: clamp(2rem, 4vw, 3rem) !important;
+  font-size: 2.5rem !important;
 }
 h2, .stMarkdown h2 {
-  font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+  font-size: 2rem !important;
 }
 h3, .stMarkdown h3 {
-  font-size: clamp(1.2rem, 2.5vw, 2rem) !important;
+  font-size: 1.5rem !important;
 }
 .stMarkdown, .stCaption, .stTextInput, .stSelectbox, .stSlider, .stButton, .stMetric, .stRadio, .stNumberInput {
-  font-size: clamp(1rem, 2vw, 1.3rem) !important;
+  font-size: 1.1rem !important;
 }
 .stButton>button {
-  font-size: clamp(1rem, 2vw, 1.3rem) !important;
+  font-size: 1.1rem !important;
 }
 </style>
 """, unsafe_allow_html=True)

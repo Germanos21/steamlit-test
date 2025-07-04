@@ -544,7 +544,7 @@ def show_ebay_search_form() -> None:
                     max_value=DEFAULT_PRICE_RANGE[1],
                     value=DEFAULT_PRICE_RANGE[1],
                     step=PRICE_STEP,
-                    format=",d",
+                    format="%d",
                     key="main_price_slider"
                 )
                 sort_by = st.selectbox(
