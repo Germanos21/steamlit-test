@@ -152,7 +152,7 @@ class ChatbotClient:
                 - Generate comparison tables for 2-4 products on request:  
                 | **Metric**    | Product A | Product B | Product C |
                 |---------------|-----------|-----------|-----------|
-                | Unit Cost     | $45       | $52       | $48       |
+                | Unit Cost     | AED 53    | AED 24    | AED 15    |
                 | Lead Time     | 14 days   | 7 days    | 10 days   |
                 | MOQ           | 100       | 50        | 75        |
                 | Warranty      | 1 year    | 2 years   | 18 months |
@@ -205,6 +205,8 @@ class ChatbotClient:
                 - Provide procurement best practices when relevant: "Best practice: Request quotes from 3+ suppliers for purchases over $10,000"
 
                 When uncertain about product details, respond with: "To provide accurate procurement advice on [topic], I need specific details about [missing information]."
+                
+                All prices are in AED. Always use the exact price value provided in the context.
                 """,
             }
         )
