@@ -10,7 +10,6 @@ import re
 from src.components.cart import Cart
 from typing import Dict, Any
 import requests  # Add this for API calls
-import io
 
 logger = logging.getLogger(__name__)
 
@@ -150,22 +149,6 @@ def fill_agreement_template(html_content: str, seller_info: dict) -> str:
     except Exception as e:
         logger.error(f"Error filling agreement template: {str(e)}")
         raise
-
-def group_items_by_seller(cart_items):
-    """Group cart items by seller and return a dictionary of seller information with their items."""
-    sellers = {}
-    for item in cart_items:
-        seller_name = item.get('seller', 'Unknown Seller')
-        if seller_name not in sellers:
-            # Create new seller entry with first item
-            sellers[seller_name] = {
-                'seller': seller_name,
-                'items': [item]
-            }
-        else:
-            # Add item to existing seller's items list
-            sellers[seller_name]['items'].append(item)
-    return sellers
 
 @st.dialog("Email Template")
 def show_email_dialog(supplier: Dict[str, Any]) -> None:

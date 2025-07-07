@@ -20,8 +20,7 @@ import logging
 import webbrowser
 import os
 from pathlib import Path
-from src.components.document_viewer import open_supply_agreement, fill_agreement_template, detect_encoding, html_to_pdf_via_pdfshift
-import io
+from src.components.document_viewer import fill_agreement_template, detect_encoding, html_to_pdf_via_pdfshift
 import base64
 
 # Configure logging
@@ -268,28 +267,6 @@ def show_pagination(current_page: int, total_pages: int) -> None:
                 st.rerun()
                 
         st.caption(f"Page {current_page + 1} of {total_pages}")
-
-
-def sort_items(items: List[Dict[str, Any]], sort_by: str) -> List[Dict[str, Any]]:
-    """Sort items based on the selected sort option."""
-    try:
-        # Get the sort key from SORT_MAP, defaulting to "Best Match"
-        sort_key = SORT_MAP.get(sort_by, "bestMatch")
-        
-        # Sort the items based on the selected criteria
-        if sort_key == "price":
-            return sorted(items, key=lambda x: float(x.get("price", 0)))
-        elif sort_key == "-price":
-            return sorted(items, key=lambda x: -float(x.get("price", 0)))
-        elif sort_key == "endTime":
-            return sorted(items, key=lambda x: x.get("endTime", ""))
-        elif sort_key == "newlyListed":
-            return sorted(items, key=lambda x: x.get("listingDate", ""))
-        else:  # bestMatch
-            return items
-    except Exception as e:
-        logger.error(f"Error sorting items: {str(e)}")
-        return items
 
 
 def show_search_form() -> None:

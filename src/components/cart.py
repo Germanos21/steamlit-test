@@ -89,61 +89,6 @@ class Cart:
                 pass
         return total
         
-    def display(self) -> None:
-        """
-        Display the cart contents using Streamlit.
-        """
-        if not self.items:
-            st.info("Your cart is empty")
-            return
-        
-        print(self.clean_data)
-        st.header("Shopping Cart")
-        
-        total_price = 0
-        for i, item in enumerate(self.items):
-            with st.container(border=True):
-                col1, col2 = st.columns([3, 2])
-                
-                with col1:
-                    st.markdown(item["title"])
-                    st.markdown(f"👤 **Seller:** {item['seller']}")
-                    st.markdown(f"**Condition:** {item['condition']}")
-                
-                with col2:
-                    try:
-                        price = float(item['price']) * 3.65
-                        total_price += price
-                        st.metric("💰 **Price**", f"AED {price:,.2f}")
-                        
-                    except (ValueError, TypeError):
-                        st.metric("💰 **Price**", "N/A")
-
-                    st.markdown(f"⭐ **Rating:** {item.get('rating', 'Unknown')}")
-                    
-                    if st.button("Remove", key=f"remove_from_cart_{i}"):
-                        self.remove_item(item.get('id', hash(item['title'])))
-                        st.rerun()
-        st.divider()
-        st.metric("Total", f"AED {total_price:,.2f}")
-
-        # if st.button("Export to chat"):
-        #     try:
-        #         chatbot = st.session_state.chatbot_client
-        #     except:
-        #         st.error("No Chatbot found")
-        #     data = self.get_cart_data_string()
-        #     response = chatbot.send_message(data)
-
-        #     st.session_state.messages.append(
-        #         {"role": "user", "content": data}
-        #     )
-        #     st.session_state.messages.append(
-        #         {"role": "assistant", "content": response}
-        #     )
-            # st.rerun()
-
-
     def prepare_data_to_chat(self) -> List[Dict[str, Any]]:
         """
         Prepare cart data for AI chat by removing unnecessary fields.
