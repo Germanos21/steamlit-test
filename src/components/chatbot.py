@@ -16,9 +16,6 @@ def fetch_url(url: str, timeout: float = 5.0) -> str:
 def display_intro():
     st.subheader("Chat with our AI Assistant", anchor=False)
 
-
-    st.subheader("Key Functionalities", divider=True)
-
     feature_col1, feature_col2 = st.columns(2)
 
     with feature_col1:
